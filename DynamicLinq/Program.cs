@@ -9,13 +9,13 @@ namespace DynamicLinq
     {
         static void Main(string[] args)
         {
-            // Normal static collection
+            // Normal like query collection
             Data.Get()
                 .Where(x => x.IsActive == true)
                 .OrderBy(x => x.Name)
                 .Select(x => new { x.Name }); // using infered prop Name from x for new type
 
-            // Kinda of useless dynamic linq query as a though experiment
+            // Kinda of useless dynamic linq query as a thought experiment
             {
                 var whereBy = WhereByOptions.NameContains; // option for first query
                 var orderBy = OrderByOptions.LoginDateDescending;
