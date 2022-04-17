@@ -9,15 +9,9 @@ namespace DynamicLinq
     {
         static void Main(string[] args)
         {
-<<<<<<< HEAD
-            // Normal static collection
-            var customers = Data.Get()
-                .Where(x => x.IsActive)
-=======
             // Normal like query collection
             Data.Get()
                 .Where(x => x.IsActive == true)
->>>>>>> 83be007c7a63066da15c59165b1682c3f9c5225b
                 .OrderBy(x => x.Name)
                 .Select(x => new { x.Name }); // using infered prop Name from x for new type
 
