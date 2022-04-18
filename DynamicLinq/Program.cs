@@ -10,11 +10,14 @@ namespace DynamicLinq
         static void Main(string[] args)
         {
             // Normal like query collection
-            Data.Get()
+            var names = Data.Get()
                 .Where(x => x.IsActive == true)
-                .OrderBy(x => x.Name)
+                .OrderByDescending(x => x.Name)
                 .Select(x => new { x.Name }); // using infered prop Name from x for new type
-
+            Console.WriteLine("\n----------");
+            foreach (var item in names) Console.WriteLine(item);
+            Console.WriteLine("----------\n");
+            
             // Kinda of useless dynamic linq query as a thought experiment
             {
                 var whereBy = WhereByOptions.NameContains; // option for first query
@@ -27,8 +30,10 @@ namespace DynamicLinq
                 IEnumerable<Customer> queriedData = 
                     whereBy == WhereByOptions.NameContains ? rawList.Where(x => x.Name.Contains("G")) : rawList.Where(x => x.IsActive);
 
+                Console.WriteLine("\nThis is stage 1");
                 foreach (var customer in queriedData)                
-                    Console.WriteLine(customer);                
+                    Console.WriteLine(customer);
+                Console.WriteLine("End Stage 1\n");
 
                 // Stage #2 -- OrderBy Query
                 //queriedData = new Lazy<IEnumerable<Customer>>(() => // Essentially an IIFE
@@ -57,9 +62,10 @@ namespace DynamicLinq
                         _ => throw new Exception("DECKER GO BOOM"),
                     };
                 }
-
+                Console.WriteLine("\n-->This is example 2");
                 foreach (var customer in queriedData)                
-                    Console.WriteLine(customer);                
+                    Console.WriteLine(customer);
+                Console.WriteLine("<--This is the end of example 2\n");
 
                 // Stage #3 -- Select Props
                 var result = new Lazy<IEnumerable<object>>(() =>
@@ -74,8 +80,10 @@ namespace DynamicLinq
                     };
                 }).Value;
 
+                Console.WriteLine("\nBeginning of phase 3");
                 foreach (var customer in result)                
-                    Console.WriteLine(customer);                
+                    Console.WriteLine(customer);
+                Console.WriteLine("End of phase 3\n");
 
                 // Get an element from results
                 var obj = result.FirstOrDefault();
