@@ -11,9 +11,9 @@ namespace DynamicLinq
         {
             // Normal like query collection
             var names = Data.Get()
-                .Where(x => x.IsActive == true)
-                .OrderByDescending(x => x.Name)
-                .Select(x => new { x.Name }); // using infered prop Name from x for new type
+                //.Where(x => x.IsActive == true)
+                .OrderByDescending(x => x.Description).ThenBy(x => x.Name)
+                .Select(x => new { x.Name, x.Description }); // using infered prop Name from x for new type
             Console.WriteLine("\n----------");
             foreach (var item in names) Console.WriteLine(item);
             Console.WriteLine("----------\n");
@@ -21,6 +21,7 @@ namespace DynamicLinq
             // Kinda of useless dynamic linq query as a thought experiment
             {
                 var whereBy = WhereByOptions.NameContains; // option for first query
+                //var whereBy = 0;
                 var orderBy = OrderByOptions.NameAscending;
                 var propOfInterest = PropertyOfInterest.Id;
 
@@ -29,7 +30,7 @@ namespace DynamicLinq
                 // Stage #1 -- Where Query
                 IEnumerable<Customer> queriedData = 
                     whereBy == WhereByOptions.NameContains ? rawList.Where(x => x.Name.Contains("G")) : rawList.Where(x => x.IsActive);
-
+                    //whereBy == 0 ? 
                 Console.WriteLine("\nThis is stage 1");
                 foreach (var customer in queriedData)                
                     Console.WriteLine(customer);
@@ -113,7 +114,8 @@ namespace DynamicLinq
         NameAscending,
         NameDescending,
         LoginDateAscending,
-        LoginDateDescending
+        LoginDateDescending,
+        NameAscendingWithinDateAscending
     }
 
     enum PropertyOfInterest
@@ -123,4 +125,19 @@ namespace DynamicLinq
         Description,
         Id
     }
+
+    enum SortLocation
+    {
+        SortByCityStateAscending,
+        SortByCityStateDescending
+    }
+
+    /*
+     * if ( chkSortByLocation.Checked ) {
+     *   if (SortToggle.value) sortby = SortLocation.SortByCityStateAscending;
+     *   sortby=SortLocation.SortByCityStateAscending ? 
+     *      .OrderByAscending(x => x.State).ThenBy(x => x.City) :
+     *      .OrderByDescending(x => x.State).ThenByDescending(x => x.City);
+     *      
+     *      */
 }

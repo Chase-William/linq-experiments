@@ -10,16 +10,16 @@ namespace DynamicLinq
     {
         public static List<Customer> Get() => new List<Customer>()
 		{
-			new Customer() { CustomerID = 1, Name = "Terri Lee Duffy", IsActive = true},
-			new Customer() { CustomerID = 2, Name = "Gail A Erickson"},
-			new Customer() { CustomerID = 3, Name = "Gigi N Matthew", IsActive = true},
-			new Customer() { CustomerID = 4, Name = "Michael Raheem"},
-			new Customer() { CustomerID = 5, Name = "Janice Galvin"},
-			new Customer() { CustomerID = 6, Name = "Michael Sullivan", IsActive = true},
-			new Customer() { CustomerID = 7, Name = "David Bradley"},
-			new Customer() { CustomerID = 8, Name = "David Benshoof"},
-			new Customer() { CustomerID = 9, Name = "Peter Gilbert", IsActive = true},
-			new Customer() { CustomerID = 10, Name = "Rebecca Bradley"},
+			new Customer() { CustomerID = 1, Name = "Terri Lee Duffy", IsActive = true, Description="Group 1"},
+			new Customer() { CustomerID = 2, Name = "Gail A Erickson", Description="Group 1"},
+			new Customer() { CustomerID = 3, Name = "Gigi N Matthew", IsActive = true, Description="Group 1"},
+			new Customer() { CustomerID = 4, Name = "Michael Raheem", Description="Group 1"},
+			new Customer() { CustomerID = 5, Name = "Janice Galvin", Description="Group 2"},
+			new Customer() { CustomerID = 6, Name = "Michael Sullivan", IsActive = true, Description="Group 2"},
+			new Customer() { CustomerID = 7, Name = "David Bradley", Description="Group 2"},
+			new Customer() { CustomerID = 8, Name = "David Benshoof", Description="Group 2"},
+			new Customer() { CustomerID = 9, Name = "Peter Gilbert", IsActive = true, Description="Group 3"},
+			new Customer() { CustomerID = 10, Name = "Rebecca Bradley", Description="Group 3"},
 		};
 	}
 
